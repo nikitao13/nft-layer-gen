@@ -9,8 +9,10 @@ async function mergeLayers(layersFolder, outputFolder) {
     const startTime = Date.now();
     try {
         const subdirectories = await fs.readdir(layersFolder);
-        const sortedSubdirectories = subdirectories
-            .sort((a, b) => parseInt(a) - parseInt(b));
+
+        const filteredSubdirectories = subdirectories.filter(subdir => subdir !== '.gitkeep');
+
+        const sortedSubdirectories = filteredSubdirectories.sort((a, b) => parseInt(a) - parseInt(b));
 
         const metadata = {};
 
